@@ -1,9 +1,14 @@
 package org.iths.userservice2024.user;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends ListCrudRepository<User, Long> {
+    @Query("SELECT u FROM User u WHERE u.userId = ?1")
+    User findByUserId(String userId);
 
+    @Query("DELETE FROM User u WHERE u.userId = ?1")
+    void deleteByUserId(String userId);
 }
