@@ -2,6 +2,9 @@ package org.iths.userservice2024.user;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -12,7 +15,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(String userId) {
+    User getUser(UUID userId) {
         return userService.findByUserId(userId);
     }
     @PostMapping
@@ -20,16 +23,20 @@ public class UserController {
         userService.createUser(user);
     }
     @GetMapping("/loggedin/{userId}")
-    Boolean isLoggedIn(@PathVariable String userId) {
+    Boolean isLoggedIn(@PathVariable UUID userId) {
         return userService.isLoggedIn(userId);
     }
     @PutMapping("/update/{userId}")
-    void updateUser(@PathVariable String userId, @RequestBody User user) {
+    void updateUser(@PathVariable UUID userId, @RequestBody User user) {
         userService.updateUser(userId, user);
     }
     @DeleteMapping("/delete/{userId}")
-    void deleteUser(@PathVariable String userId) {
+    void deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
+    }
+    @GetMapping("/all")
+    List<User> getAllUsers() {
+        return userService.findAll();
     }
 
 }
