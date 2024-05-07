@@ -13,7 +13,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByUserId(UUID userId) {
+    public User findByUserId(String userId) {
         return userRepository.findByUserId(userId);
     }
 
@@ -21,21 +21,14 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Boolean isLoggedIn(UUID userId) {
-        User user = userRepository.findByUserId(userId);
-        if (user == null) return false;
-        return user.getLoggedIn();
+    public void updateUser(String userId, User user) {
+        var existingUser = userRepository.findByUserId(userId);
+        existingUser.setName(user.getName());
+        existingUser.setPictureLink(user.getPictureLink());
+        userRepository.save(existingUser);
     }
 
-    public void updateUser(UUID userId, User user) {
-       var existingUser = userRepository.findByUserId(userId);
-       existingUser.setLoggedIn(user.getLoggedIn());
-       existingUser.setPassword(user.getPassword());
-       existingUser.setUsername(user.getUsername());
-       userRepository.save(existingUser);
-    }
-
-    public void deleteUser(UUID userId) {
+    public void deleteUser(String userId) {
         userRepository.deleteByUserId(userId);
     }
 

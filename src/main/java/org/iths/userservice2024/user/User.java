@@ -14,20 +14,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID userId;
-    private String username;
-    private String password;
-    private Boolean loggedIn = false;
+    private String userId;
+    private String name;
+    private String pictureLink="https://cdn.starwebserver.se/shops/ksl-trading-ab/files/4500.jpg";
 
     public User() {
     }
 
-    public UUID getUserId() {
-        return UUID.randomUUID();
+    public User(String userId, String name) {
+        this.userId = userId;
+        this.name = name;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public User(String userId, String name, String pictureLink) {
+        this.userId = userId;
+        this.name = name;
+        this.pictureLink = pictureLink;
     }
 }

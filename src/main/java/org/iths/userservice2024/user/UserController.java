@@ -1,6 +1,8 @@
 package org.iths.userservice2024.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,26 +17,27 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(UUID userId) {
-        return userService.findByUserId(userId);
+    User getUser(@PathVariable String userId) {
+        var user = userService.findByUserId(userId);
+        if(user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User ID not provided");
+        }
+        else return user;
     }
     @PostMapping
     void createUser(@RequestBody User user) {
         userService.createUser(user);
     }
-    @GetMapping("/loggedin/{userId}")
-    Boolean isLoggedIn(@PathVariable UUID userId) {
-        return userService.isLoggedIn(userId);
-    }
+
     @PutMapping("/update/{userId}")
-    void updateUser(@PathVariable UUID userId, @RequestBody User user) {
+    void updateUser(@PathVariable String userId, @RequestBody User user) {
         userService.updateUser(userId, user);
     }
     @DeleteMapping("/delete/{userId}")
-    void deleteUser(@PathVariable UUID userId) {
+    void deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
     }
-    @GetMapping("/all")
+    @GetMapping()
     List<User> getAllUsers() {
         return userService.findAll();
     }

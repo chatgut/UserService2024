@@ -9,8 +9,8 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends ListCrudRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.userId = ?1")
-    User findByUserId(UUID userId);
+    User findByUserId(String userId);
 
     @Query("DELETE FROM User u WHERE u.userId = ?1")
-    void deleteByUserId(UUID userId);
+    void deleteByUserId(String userId);
 }
