@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -17,7 +16,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable String userId) {
+    Users getUser(@PathVariable String userId) {
         var user = userService.findByUserId(userId);
         if(user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User ID not provided");
@@ -25,20 +24,20 @@ public class UserController {
         else return user;
     }
     @PostMapping
-    void createUser(@RequestBody User user) {
-        userService.createUser(user);
+    void createUser(@RequestBody Users users) {
+        userService.createUser(users);
     }
 
     @PutMapping("/update/{userId}")
-    void updateUser(@PathVariable String userId, @RequestBody User user) {
-        userService.updateUser(userId, user);
+    void updateUser(@PathVariable String userId, @RequestBody Users users) {
+        userService.updateUser(userId, users);
     }
     @DeleteMapping("/delete/{userId}")
     void deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
     }
     @GetMapping()
-    List<User> getAllUsers() {
+    List<Users> getAllUsers() {
         return userService.findAll();
     }
 

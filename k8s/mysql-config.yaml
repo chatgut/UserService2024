@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-config
 data:
-  mysql-connection-url: "mysql-service"
+  mysql-connection-url: "mysql"
   mysql-connection-url-db: "mydatabase"

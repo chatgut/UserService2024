@@ -3,7 +3,6 @@ package org.iths.userservice2024.user;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -13,18 +12,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByUserId(String userId) {
+    public Users findByUserId(String userId) {
         return userRepository.findByUserId(userId);
     }
 
-    public void createUser(User user) {
-        userRepository.save(user);
+    public void createUser(Users users) {
+        userRepository.save(users);
     }
 
-    public void updateUser(String userId, User user) {
+    public void updateUser(String userId, Users users) {
         var existingUser = userRepository.findByUserId(userId);
-        existingUser.setName(user.getName());
-        existingUser.setPictureLink(user.getPictureLink());
+        existingUser.setName(users.getName());
+        existingUser.setPictureLink(users.getPictureLink());
         userRepository.save(existingUser);
     }
 
@@ -32,7 +31,7 @@ public class UserService {
         userRepository.deleteByUserId(userId);
     }
 
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userRepository.findAll();
     }
 }

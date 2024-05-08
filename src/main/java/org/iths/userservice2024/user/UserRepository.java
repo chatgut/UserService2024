@@ -4,13 +4,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface UserRepository extends ListCrudRepository<User, Long> {
-    @Query("SELECT u FROM User u WHERE u.userId = ?1")
-    User findByUserId(String userId);
+public interface UserRepository extends ListCrudRepository<Users, Long> {
+    @Query("SELECT u FROM Users u WHERE u.userId = ?1")
+    Users findByUserId(String userId);
 
-    @Query("DELETE FROM User u WHERE u.userId = ?1")
+    @Query("DELETE FROM Users u WHERE u.userId = ?1")
     void deleteByUserId(String userId);
 }

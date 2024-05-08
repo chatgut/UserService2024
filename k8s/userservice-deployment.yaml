@@ -21,12 +21,12 @@ spec:
           ports:
             - containerPort: 8002
           env:
-            - name: USER_NAME
+            - name: MYSQL_USER
               valueFrom:
                   secretKeyRef:
                     name: mysql-secret
                     key: mysql-user
-            - name: USER_PASSWORD
+            - name: MYSQL_PASSWORD
               valueFrom:
                   secretKeyRef:
                     name: mysql-secret
@@ -35,4 +35,9 @@ spec:
               valueFrom:
                   configMapKeyRef:
                     name: mysql-config
-                    key: mysql-url
+                    key: mysql-connection-url
+            - name: DB_URL_DB
+              valueFrom:
+                  configMapKeyRef:
+                    name: mysql-config
+                    key: mysql-connection-url-db
