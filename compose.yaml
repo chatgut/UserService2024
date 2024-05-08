@@ -1,4 +1,10 @@
 services:
+  spring:
+    image: 'user-service:latest'
+    ports:
+      - '8002:8002'
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydatabase'
   mysql:
     image: 'mysql:latest'
     environment:

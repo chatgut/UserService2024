@@ -3,22 +3,36 @@ kind: Deployment
 metadata:
   name: userservice-deployment
   labels:
-    app: userservice-deployment
+    app: userservice
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: userservice-deployment
+      app: userservice
   template:
     metadata:
       labels:
-        app: userservice-deployment
+        app: userservice
     spec:
       containers:
-        - name: userservice-deployment
-          image: userservice2024:1.0
+        - name: userservice
+          image: user-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
-              protocol: TCP
-      restartPolicy: Always
+            - containerPort: 8002
+          env:
+            - name: USER_NAME
+              valueFrom:
+                  secretKeyRef:
+                    name: mysql-secret
+                    key: mysql-user
+            - name: USER_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: mysql-secret
+                    key: mysql-password
+            - name: DB_URL
+              valueFrom:
+                  configMapKeyRef:
+                    name: mysql-config
+                    key: mysql-url

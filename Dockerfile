@@ -9,4 +9,4 @@ ARG DEPENDENCY=/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","org.k8s.searchservice.SearchserviceApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","org.iths.userservice2024.UserService2024Application"]
