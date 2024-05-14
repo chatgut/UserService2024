@@ -10,8 +10,6 @@ import lombok.Data;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String userId;
     private String name;
     private String pictureLink="https://cdn.starwebserver.se/shops/ksl-trading-ab/files/4500.jpg";

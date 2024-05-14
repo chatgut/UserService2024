@@ -1,6 +1,9 @@
 package org.iths.userservice2024.user;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,6 +20,9 @@ public class UserService {
     }
 
     public void createUser(Users users) {
+        if(userRepository.findByUserId(users.getUserId()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User ID already exists");
+        }
         userRepository.save(users);
     }
 

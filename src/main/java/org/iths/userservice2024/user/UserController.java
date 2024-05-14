@@ -28,12 +28,13 @@ public class UserController {
         userService.createUser(users);
     }
 
-    @PutMapping("/update/{userId}")
-    void updateUser(@PathVariable String userId, @RequestBody Users users) {
+    @PutMapping("/update")
+    void updateUser(@RequestHeader(value="userId") String userId, @RequestBody Users users) {
         userService.updateUser(userId, users);
     }
-    @DeleteMapping("/delete/{userId}")
-    void deleteUser(@PathVariable String userId) {
+    @DeleteMapping("/delete")
+    void deleteUser(@RequestHeader(value = "userId") String userId) {
+        System.out.println(userId);
         userService.deleteUser(userId);
     }
     @GetMapping()
